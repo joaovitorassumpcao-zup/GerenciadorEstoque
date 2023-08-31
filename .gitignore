@@ -5,9 +5,9 @@ target/
 !**/src/test/**/target/
 
 ### MVN ###
+mvnw.cmd
 .mvn
 mvnw
-mvnw.cmd
 
 ### STS ###
 .apt_generated
@@ -36,6 +36,5 @@ build/
 
 ### VS Code ###
 .vscode/
-!/.mvn/
-!/mvnw
-!/mvnw.cmd
+
+
