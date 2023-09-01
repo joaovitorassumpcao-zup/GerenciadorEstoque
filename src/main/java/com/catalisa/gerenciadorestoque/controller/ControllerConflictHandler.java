@@ -10,5 +10,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class ControllerConflictHandler {
     @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public void handleConflict() {}
+    public void handleConflict() {
+    }
 }

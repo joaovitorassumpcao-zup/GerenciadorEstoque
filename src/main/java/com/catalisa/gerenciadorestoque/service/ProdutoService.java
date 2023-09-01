@@ -5,10 +5,8 @@ import com.catalisa.gerenciadorestoque.entity.Produto;
 import com.catalisa.gerenciadorestoque.repository.ProdutoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
-import java.rmi.NotBoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,7 +50,7 @@ public class ProdutoService {
     }
 
     public void delete(Long id) {
-        if(!produtoRepository.existsById(id)) throw new EntityNotFoundException();
+        if (!produtoRepository.existsById(id)) throw new EntityNotFoundException();
         produtoRepository.deleteById(id);
     }
 }
