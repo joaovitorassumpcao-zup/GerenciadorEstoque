@@ -1,6 +1,6 @@
 # Gerenciador de Estoque
 
-Este projeto é um sistema de gerenciamento de estoque desenvolvido com o Spring Framework e um banco de dados PostgreSQL. Ele permite a criação, atualização, leitura e exclusão de produtos no estoque por meio de requisições HTTP.
+Este projeto é um sistema de gerenciamento de estoque desenvolvido com o Spring Framework e um banco de dados H2. Ele permite a criação, atualização, leitura e exclusão de produtos no estoque por meio de requisições HTTP.
 
 ## 🚀 Funcionalidades
 
