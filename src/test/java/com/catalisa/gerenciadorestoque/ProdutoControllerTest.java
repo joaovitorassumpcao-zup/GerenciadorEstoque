@@ -1,5 +1,6 @@
-package com.catalisa.gerenciadorestoque.controller;
+package com.catalisa.gerenciadorestoque;
 
+import com.catalisa.gerenciadorestoque.controller.ProdutoController;
 import com.catalisa.gerenciadorestoque.dto.ProdutoDTO;
 import com.catalisa.gerenciadorestoque.service.ProdutoService;
 import org.junit.jupiter.api.BeforeEach;
@@ -57,21 +58,75 @@ class ProdutoControllerTest {
 
     @Test
     void listarProdutos() throws Exception {
-        // TODO: Implementar o teste para listarProdutos
+        ProdutoDTO produto1 = ProdutoDTO.builder()
+                .nome("Produto 1")
+                .descricao("Descrição 1")
+                .preco(BigDecimal.valueOf(50.0))
+                .quantidade(5)
+                .build();
+
+        ProdutoDTO produto2 = ProdutoDTO.builder()
+                .nome("Produto 2")
+                .descricao("Descrição 2")
+                .preco(BigDecimal.valueOf(100.0))
+                .quantidade(10)
+                .build();
+
+        when(produtoService.findAll()).thenReturn(Arrays.asList(produto1, produto2));
+
+        mockMvc.perform(get("/produtos"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].nome").value("Produto 1"))
+                .andExpect(jsonPath("$[1].nome").value("Produto 2"));
+
+        verify(produtoService, times(1)).findAll();
     }
 
     @Test
     void obterProdutoPorId() throws Exception {
-        // TODO: Implementar o teste para obterProdutoPorId
+        ProdutoDTO produto = ProdutoDTO.builder()
+                .nome("Produto Teste")
+                .descricao("Descrição Teste")
+                .preco(BigDecimal.valueOf(100.0))
+                .quantidade(10)
+                .build();
+
+        when(produtoService.findByID(1L)).thenReturn(Optional.of(produto));
+
+        mockMvc.perform(get("/produtos/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.nome").value("Produto Teste"));
+
+        verify(produtoService, times(1)).findByID(1L);
     }
 
     @Test
     void atualizarProduto() throws Exception {
-        // TODO: Implementar o teste para atualizarProduto
+        ProdutoDTO produtoAtualizado = ProdutoDTO.builder()
+                .nome("Produto Atualizado")
+                .descricao("Descrição Atualizada")
+                .preco(BigDecimal.valueOf(150.0))
+                .quantidade(15)
+                .build();
+
+        when(produtoService.update(eq(1L), any(ProdutoDTO.class))).thenReturn(Optional.of(produtoAtualizado));
+
+        mockMvc.perform(put("/produtos/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{ \"nome\": \"Produto Atualizado\", \"descricao\": \"Descrição Atualizada\", \"preco\": 150.0, \"quantidade\": 15 }"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.nome").value("Produto Atualizado"));
+
+        verify(produtoService, times(1)).update(eq(1L), any(ProdutoDTO.class));
     }
 
     @Test
     void excluirProduto() throws Exception {
-        // TODO: Implementar o teste para excluirProduto
+        doNothing().when(produtoService).delete(1L);
+
+        mockMvc.perform(delete("/produtos/1"))
+                .andExpect(status().isNoContent());
+
+        verify(produtoService, times(1)).delete(1L);
     }
 }
