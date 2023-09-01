@@ -21,19 +21,19 @@ public class Produto implements Serializable{
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "Nome", nullable = false, length = 55)
+    @Column(name = "nome", nullable = false, length = 55)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private String nome;
 
-    @Column(name = "Descricao")
+    @Column(name = "descricao")
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private String descricao;
 
-    @Column(name = "Quantidade", nullable = false)
+    @Column(name = "quantidade", nullable = false)
     @JdbcTypeCode(SqlTypes.INTEGER)
     private Integer quantidade;
 
-    @Column(name = "Preco", nullable = false, precision = 19, scale = 2)
+    @Column(name = "preco", nullable = false, precision = 19, scale = 2)
     @JdbcTypeCode(SqlTypes.DECIMAL)
     private BigDecimal preco;
 
